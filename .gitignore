@@ -1,0 +1,3 @@
+.vscode
+/ansible/vars/docker_hub.yml
+/ansible/nginix.pem

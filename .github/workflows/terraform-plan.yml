@@ -1,0 +1,45 @@
+name: Terraform Plan and Cost
+
+on:
+  pull_request:
+    branches: [ "infra_main" ]
+
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.3.0
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -out=plan.out
+
+      # If using InfraCost for cost estimates
+      - name: InfraCost Breakdown
+        id: infracost
+        run: |
+          infracost breakdown --path . --format json --out-file infracost.json
+          # Additional steps to format the output can be added here
+
+      - name: Comment on PR with Plan and Cost
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: "Terraform Plan and Cost"
+          message: |
+            ```terraform
+            ${ { steps.plan.outputs.stdout } }
+            ```
+            ### Cost Estimation:
+            ```json
+            ${ { steps.infracost.outputs.comment } }
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}

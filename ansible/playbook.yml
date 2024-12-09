@@ -1,0 +1,9 @@
+- name: Configure and deploy fullstack application
+  hosts: all
+  become: true
+  roles: 
+    - common
+    - role: app
+      tags: application
+    - role: monitoring
+      tags: monitoring
