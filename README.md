@@ -99,6 +99,9 @@ Submit your work via the **GitHub repository link**, including:
 1. Link to your github repo containing both the infrastructure and application workflows.  
 2. Terraform and Ansible configurations.  
 3. Screenshots of successful execution for all pipelines.  
-4. A **detailed blog post** documenting your process, including an **architectural diagram**.  
+4. A **detailed blog post** documenting your process, including an **architectural diagram**.
+5. 
+
+Testing the terraform plan workflow
 
 ⏰ **Deadline:** Submit on or before **loading...**.  
