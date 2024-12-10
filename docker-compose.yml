@@ -18,7 +18,7 @@ services:
       retries: 5
 
   backend:
-    image: backend
+    image: username/backend:build-number
     container_name: backend
     env_file:
       - ./backend/.env
@@ -35,7 +35,7 @@ services:
       - app-network
 
   frontend:
-    image: frontend
+    image: username/frontend:build-number
     container_name: frontend
     env_file:
       - ./frontend/.env
