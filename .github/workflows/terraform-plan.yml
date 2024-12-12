@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [ "infra_main" ]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 env:
   INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
 
