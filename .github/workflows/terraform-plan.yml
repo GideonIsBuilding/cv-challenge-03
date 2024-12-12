@@ -53,19 +53,13 @@ jobs:
         id: infracost
         run: |
           cd terraform
-          infracost breakdown --path . --format json --out-file infracost.json
+          infracost breakdown --path . --format json --out-file /tmp/infracost.json
           # Additional steps to format the output can be added here
 
       - name: Comment on PR with Plan and Cost
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          header: "Terraform Plan and Cost"
-          message: |
-            ```terraform
-            ${ { steps.plan.outputs.stdout } }
-            ```
-            ### Cost Estimation:
-            ```json
-            ${ { steps.infracost.outputs.comment } }
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+        run: |
+          infracost comment github --path=/tmp/infracost.json \
+          --repo=$GITHUB_REPOSITORY \
+          --github-token=${{ github.token }} \
+          --pull-request=${{ github.event.pull_request.number }} \
+          --behavior=update
