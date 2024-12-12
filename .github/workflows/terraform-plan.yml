@@ -21,6 +21,12 @@ jobs:
           cd terraform
           terraform init
 
+      - name: Write PEM file
+        run: |
+          cd terraform
+          echo "${{ secrets.NGINIX_KEY }}" > nginix.pem 
+          chmod 600 nginix.pem
+
       - name: Terraform Plan
         id: plan
         run: |
