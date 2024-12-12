@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "integration" ]
 
+permissions:
+  contents: write
+
 jobs:
   app-ci:
     runs-on: ubuntu-latest
