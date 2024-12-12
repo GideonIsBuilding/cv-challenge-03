@@ -53,7 +53,7 @@ jobs:
         id: infracost
         run: |
           cd terraform
-          infracost breakdown --path . --format json --out-file infracost.json
+          infracost breakdown --path . --format json --out-file /tmp/infracost.json
           # Additional steps to format the output can be added here
 
       - name: Comment on PR with Plan and Cost
