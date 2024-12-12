@@ -40,6 +40,11 @@ jobs:
           cd terraform
           terraform plan -no-color -out=plan.out
 
+      - name: Setup InfraCost
+        uses: infracost/actions/setup@v3
+        with:
+          api_key: ${{ secrets.INFRACOST_API_KEY }}
+      
       # If using InfraCost for cost estimates
       - name: InfraCost Breakdown
         id: infracost
