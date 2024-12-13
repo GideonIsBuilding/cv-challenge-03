@@ -9,7 +9,7 @@ resource "null_resource" "ansible" {
     inline = ["echo 'connected!'"]
     }
     provisioner "local-exec" {
-        command = "ansible-playbook -i ${path.module}../ansible/inventory ${path.module}../ansible/playbook.yml --extra-vars '@${path.module}../ansible/vars/docker_hub.yml'"
+        command = "ansible-playbook -i ${path.module}/../ansible/inventory ${path.module}/../ansible/playbook.yml --tags monitoring --extra-vars '@${path.module}/../ansible/vars/docker_hub.yml'"
     }
 
     depends_on = [ aws_instance.app ]
