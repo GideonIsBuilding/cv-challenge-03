@@ -18,10 +18,14 @@ jobs:
           terraform_version: 1.3.0
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd terraform
+          terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: |
+          cd terraform
+          terraform apply -auto-approve
 
       - name: Terraform Output
         id: tf_output
