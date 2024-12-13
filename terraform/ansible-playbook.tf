@@ -3,7 +3,7 @@ resource "null_resource" "ansible" {
     connection {
         host = data.aws_eip.dojo-eip.public_ip
         user = "ubuntu"
-        private_key = file("nginix.pem")
+        private_key = file("${path.module}/nginix.pem")
     }
 
     inline = ["echo 'connected!'"]
