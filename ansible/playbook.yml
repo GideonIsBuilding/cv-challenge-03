@@ -2,7 +2,8 @@
   hosts: all
   become: true
   roles: 
-    - common
+    - common:
+      tags: monitoring
     - role: app
       tags: application
     - role: monitoring
