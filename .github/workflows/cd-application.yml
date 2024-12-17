@@ -27,4 +27,6 @@ jobs:
           echo "docker_hub_password: \"${{ secrets.DOCKER_PASSWORD }}\"" >> ansible/vars/docker_hub.yml
 
       - name: Deploy Application Stack
-        run: ansible-playbook -i ansible/inventory ansible/playbook.yml --tags "application"
+        run: |
+          cd ansible
+          ansible-playbook -i ansible/inventory ansible/playbook.yml --tags "application"
