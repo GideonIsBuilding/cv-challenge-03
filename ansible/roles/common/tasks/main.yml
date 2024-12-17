@@ -46,3 +46,9 @@
     src: ../../../frontend/.env
     dest: /home/ubuntu/frontend/.env
     mode: '0644'
+
+- name: Create network
+  docker_network:
+    name: app-network
+    driver: bridge
+    state: present

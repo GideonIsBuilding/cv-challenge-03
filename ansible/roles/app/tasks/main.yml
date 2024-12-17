@@ -18,11 +18,11 @@
     name: postgres_data
     state: present
 
-- name: Create network
-  docker_network:
-    name: app-network
-    driver: bridge
-    state: present
+# - name: Create network
+#   docker_network:
+#     name: app-network
+#     driver: bridge
+#     state: present
 
 - name: Run Postgres container
   community.docker.docker_container:
