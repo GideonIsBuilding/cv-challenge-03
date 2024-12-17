@@ -14,5 +14,17 @@ jobs:
       - name: Install Ansible
         run: sudo apt-get update && sudo apt-get install -y ansible
 
+      - name: Write PEM file
+        run: |
+          cd terraform
+          echo "${{ secrets.NGINIX_KEY }}" > nginix.pem 
+          chmod 600 nginix.pem
+
+      - name: Create vars file
+        run: |
+          mkdir -p ansible/vars
+          echo "docker_hub_username: \"${{ secrets.DOCKER_USERNAME }}\"" > ansible/vars/docker_hub.yml
+          echo "docker_hub_password: \"${{ secrets.DOCKER_PASSWORD }}\"" >> ansible/vars/docker_hub.yml
+
       - name: Deploy Application Stack
         run: ansible-playbook -i ansible/inventory ansible/playbook.yml --tags "application"
