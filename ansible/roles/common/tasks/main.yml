@@ -37,12 +37,18 @@
 
 - name: Copy environment file for backend
   copy:
-    src: /home/gideon/cv-challenge-o2/backend/.env
+    src: ../../../backend/.env
     dest: /home/ubuntu/backend/.env
     mode: '0644'
 
 - name: Copy environment file for frontend
   copy:
-    src: /home/gideon/cv-challenge-o2/frontend/.env
+    src: ../../../frontend/.env
     dest: /home/ubuntu/frontend/.env
     mode: '0644'
+
+- name: Create network
+  docker_network:
+    name: app-network
+    driver: bridge
+    state: present
